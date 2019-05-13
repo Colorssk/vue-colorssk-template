@@ -89,7 +89,8 @@ export default {
         showname: '复合曲线'
       }
     ]
-    if (window.localStorage.getItem('flag') === 'false') {
+    // if (window.localStorage.getItem('flag') === 'false') {
+    if (this.$route.query.flag === 'false') {
       failData.map((item, index) => {
         if (item.name === 'permision') {
           failData.splice(index, 1)
@@ -103,7 +104,8 @@ export default {
       }
     })
     failData = temparr
-    if (window.localStorage.getItem('flag') === 'true') {
+    // if (window.localStorage.getItem('flag') === 'true') {
+    if (this.$route.query.flag === true) {
       failData = failData.concat([{
         children: [],
         icon: 'el-icon-menu',
@@ -111,6 +113,21 @@ export default {
         showname: '权限'
       }])
     }
+    // 教师加上教师路由(students)
+    if (!this.$route.query.isStudent) {
+      failData = failData.concat([{
+        children: [{
+          children: [],
+          icon: 'el-icon-menu',
+          name: 'students',
+          showname: '学徒'
+        }],
+        icon: 'el-icon-menu',
+        name: 'students',
+        showname: '教师'
+      }])
+    }
+
     this.menuList = failData.concat(this.menuList)
   },
   components: {},

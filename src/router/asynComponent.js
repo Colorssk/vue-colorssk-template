@@ -29,5 +29,15 @@ export default {
     import('@/components/line/mixEcharts').then((module) => {
       resolve(module)
     })
+  },
+  students (resolve) {
+    import('@/components/teachers/students').then((module) => {
+      resolve(module)
+    })
+  },
+  hello (resolve) {
+    import('@/components/hello/hello').then((module) => {
+      resolve(module)
+    })
   }
 }

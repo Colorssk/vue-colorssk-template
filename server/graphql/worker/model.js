@@ -37,6 +37,9 @@ export const workerType = new GraphQLObjectType({
     },
     isStudent: {
       type: GraphQLInt
+    },
+    point: {
+      type: GraphQLInt
     }
   }
 })
@@ -60,6 +63,9 @@ export const workerInput = new GraphQLInputObjectType({
       type: GraphQLBoolean
     },
     isStudent: {
+      type: GraphQLInt
+    },
+    point: {
       type: GraphQLInt
     }
   }
@@ -95,6 +101,9 @@ export const WorkerResult = new GraphQLObjectType({
     },
     isStudent: {
       type: GraphQLInt
+    },
+    point: {
+      type: GraphQLInt
     }
   }
 })
@@ -129,6 +138,9 @@ export const workersearch = new GraphQLObjectType({
       type: new GraphQLList(GraphQLString)
     },
     isStudent: {
+      type: GraphQLInt
+    },
+    point: {
       type: GraphQLInt
     }
   }

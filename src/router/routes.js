@@ -47,5 +47,29 @@ export const constantRouterMap = [
         component: asynComponent.mixEcharts
       }
     ]
+  },
+  {
+    path: '/students',
+    component: Layout,
+    redirect: '/students/index',
+    children: [
+      {
+        path: '/students/index',
+        name: 'students',
+        component: asynComponent.students
+      }
+    ]
+  },
+  {
+    path: '/hello',
+    component: Layout,
+    redirect: '/hello/index',
+    children: [
+      {
+        path: '/hello/index',
+        name: 'hello',
+        component: asynComponent.hello
+      }
+    ]
   }
 ]

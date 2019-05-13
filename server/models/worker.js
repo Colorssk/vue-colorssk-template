@@ -30,6 +30,10 @@ const workerSchema = new mongoose.Schema({
   isStudent: {
     type: Number,
     dafault: 0
+  },
+  point: {
+    type: Number,
+    default: 0
   }
 })
 // console.log(moment().format())

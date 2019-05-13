@@ -74,8 +74,33 @@
             </div>
           </el-dialog>
           <el-dialog title="添加教师" :visible.sync="dialogTeacherVisible">
-          <el-form :model="formTeacher">
-              <el-form-item label="用户权限">
+          <el-form :rules="rules" :model="formTeacher" label-position="left" label-width="80px">
+              <el-form-item label="名字" prop="name">
+                <el-input
+                  prefix-icon="el-icon-search"
+                  placeholder="请输入姓名"
+                  v-model="formTeacher.name"
+                  clearable>
+                </el-input>
+              </el-form-item>
+              <el-form-item label="工号" prop="work_id">
+                <el-input
+                  placeholder="请输入工号"
+                  v-model="formTeacher.work_id"
+                  clearable>
+                </el-input>
+              </el-form-item>
+              <el-form-item label="岗位" align="left" prop="job">
+                <el-select v-model="formTeacher.job" multiple placeholder="请选择">
+                  <el-option
+                    v-for="item in jobs"
+                    :key="item"
+                    :label="item"
+                    :value="item">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="用户权限" align="left">
                 <el-select v-model="formTeacher.right" multiple placeholder="请选择">
                   <el-option
                     v-for="item in options"
@@ -85,7 +110,7 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="标识">
+              <el-form-item label="标识" align="left">
                  <el-radio-group v-model="formTeacher.radio">
                   <el-radio :label="0">教师</el-radio>
                   <el-radio :label="1">学生</el-radio>
@@ -122,11 +147,26 @@ export default {
       },
       formTeacher: {
         right: [],
-        radio: 0
+        radio: 0,
+        name: '',
+        work_id: null,
+        job: []
       },
       editName: '',
       radio: 0,
-      radioArr: ['教师', '学生']
+      radioArr: ['教师', '学生'],
+      jobs: ['数学', '英语', '语文', '物理', '化学', '政治', '历史'],
+      rules: {
+        name: [
+          {required: true, message: '请输入姓名', trigger: 'blur'}
+        ],
+        work_id: [
+          {required: true, message: '请输入工号', trigger: 'blur'}
+        ],
+        job: [
+          {require: true, message: '请输入岗位', trigger: 'blur'}
+        ]
+      }
     }
   },
   watch: {
@@ -152,29 +192,54 @@ export default {
     // this.cavasAni()
   },
   methods: {
+    graphqlArrTrans (arr) {
+      var tranarr = ''
+      arr.forEach((item, index) => {
+        if (index !== arr.length) {
+          tranarr += '"' + item + '",'
+        } else {
+          tranarr += '"' + item + '"'
+        }
+      })
+      return tranarr
+    },
     addConfirm () {
-      console.log(this.formTeacher.right)
-      console.log(this.radioArr[this.formTeacher.radio])
-
-      this.dialogFormVisible = false
+      this.$graphql.request(`
+        mutation{
+            WorkerCreate(data:{
+              name: "${this.formTeacher.name}",
+              work_id: ${this.formTeacher.work_id},
+              job:[${this.graphqlArrTrans(this.formTeacher.job)}],
+              rights:[${this.graphqlArrTrans(this.formTeacher.right)}],
+              admin: false,
+              isStudent: ${this.formTeacher.radio}
+            }){
+                name,
+                work_id,
+                isStudent
+              }
+                    }
+        `).then(result => {
+        console.log(result)
+      })
+      this.dialogTeacherVisible = false
     },
     workersFilter (arr) {
-      debugger
       arr.map(item => {
         item.isStudent = this.radioArr[item.isStudent]
       })
       return arr
     },
     confirm () {
-      console.log(this.form.right)
-      var tranarr = ''
-      this.form.right.forEach((item, index) => {
-        if (index !== this.form.right.length) {
-          tranarr += '"' + item + '",'
-        } else {
-          tranarr += '"' + item + '"'
-        }
-      })
+      // var tranarr = ''
+      // this.form.right.forEach((item, index) => {
+      //   if (index !== this.form.right.length) {
+      //     tranarr += '"' + item + '",'
+      //   } else {
+      //     tranarr += '"' + item + '"'
+      //   }
+      // })
+      var tranarr = this.graphqlArrTrans(this.form.right)
       this.$graphql.request(`
        mutation{
             WorkerUpdate(data:{

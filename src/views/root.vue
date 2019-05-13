@@ -41,12 +41,14 @@ export default {
   },
   methods: {
     login () {
+      let isStudentOptions = [false, true]
       this.$graphql.request(`
           query{
             worker(name:"${this.loginForm.name}"){
               work_id,
               admin,
-              rights
+              rights,
+              isStudent
             }
           }
         `).then(result => {
@@ -68,11 +70,13 @@ export default {
               //     this.$router.options.routes.splice(index, 1)
               //   }
               // })
-              this.$router.push({path: `${result.worker[0].rights[0]}`})
+              // 如果不是管理员并且是教师
+              // 添加教师的动态路由(添加标志位)
+              this.$router.push({path: 'hello', query: {isStudent: isStudentOptions[result.worker[0].isStudent], flag: false}})
             } else {
               window.localStorage.setItem('flag', true)
               // this.$store.dispatch('setFlag', true)
-              this.$router.push({path: 'permision'})
+              this.$router.push({path: 'permision', query: {isStudent: false, flag: true}})
             }
           }
         }
