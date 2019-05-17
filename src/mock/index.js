@@ -9,5 +9,5 @@ Mock.XHR.prototype.send = function () {
   this.proxy_send(...arguments)
 }
 // Mock.mock(/\/api\/menu\/list/, 'get', test.list)
-Mock.mock('http://localhost:3000/api/getMenuInfo', 'get', test.list)
+Mock.mock('http://localhost:4000/api/getMenuInfo', 'get', test.list)
 export default Mock

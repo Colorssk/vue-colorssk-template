@@ -1,6 +1,6 @@
 <template>
-  <canvas id="canvas">
-      </canvas>
+    <canvas id="canvas">
+    </canvas>
 </template>
 <script>
 export default {

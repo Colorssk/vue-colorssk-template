@@ -17,6 +17,7 @@ export const permission = (router, store) => {
         if (!getCookie('access_token')) {
           // 在获取menu之前还需要一个登陆接口
           http({ url: api.getAsyncMenu(), method: 'get', Mock: true })()().then(res => {
+            debugger
             if (Number(res.data.msgCode) === 100) {
               // 获取到动态路由
               var tempMenus = res.data.data

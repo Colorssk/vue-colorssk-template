@@ -6,7 +6,7 @@ export default {
     return url
   },
   getAsyncMenu () {
-    url = 'http://localhost:3000/api/getMenuInfo'
+    url = 'http://localhost:4000/api/getMenuInfo'
     return url
   }
 }

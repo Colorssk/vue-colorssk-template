@@ -39,5 +39,15 @@ export default {
     import('@/components/hello/hello').then((module) => {
       resolve(module)
     })
+  },
+  studentInfo (resolve) {
+    import('@/components/studentInfo/studentInfo').then((module) => {
+      resolve(module)
+    })
+  },
+  test (resolve) {
+    import('@/views/testpage/test.vue').then((module) => {
+      resolve(module)
+    })
   }
 }

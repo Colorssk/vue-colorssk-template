@@ -117,5 +117,5 @@ export const http = (obj) => request.bind(obj)
             // this.$mergeRequest(arr,(res1,res2)=>{})
 // 文档里面需要提供一下请求参数
 // 本地Mock环境填写的数据调用方式：this.$get('',{})({url: ''}).then(res=>{})
-//重写之后调用方式：http({ url: 'http://localhost:3000/getMenuInfo', method: 'get', Mock: true })(//这里是执行request,无需传参因为方法体内未接受)(//这里是执行insatnce对象ps：axios.create()之后返回的是个方法需要执行).then(res => {
+//重写之后调用方式：http({ url: 'http://localhost:4000/getMenuInfo', method: 'get', Mock: true })(//这里是执行request,无需传参因为方法体内未接受)(//这里是执行insatnce对象ps：axios.create()之后返回的是个方法需要执行).then(res => {
 // 因为axios默认返回是会包一层data的所以获取后端数据的时候默认res.data})

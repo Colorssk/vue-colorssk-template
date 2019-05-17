@@ -64,6 +64,5 @@ export default {
     transition: margin-left .28s;
     margin-left: 65px;
     top: 58px;
-    position: relative;
 }
 </style>

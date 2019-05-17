@@ -127,6 +127,19 @@ export default {
         showname: '教师'
       }])
     }
+    if (this.$route.query.isStudent && !this.$route.query.falg) {
+      failData = failData.concat([{
+        children: [{
+          children: [],
+          icon: 'el-icon-menu',
+          name: 'studentInfo',
+          showname: '详情'
+        }],
+        icon: 'el-icon-menu',
+        name: 'studentInfo',
+        showname: '学生'
+      }])
+    }
 
     this.menuList = failData.concat(this.menuList)
   },

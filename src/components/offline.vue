@@ -14,19 +14,19 @@
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        offlineIco: './static/images/default.png'
-      }
-    },
-    methods: {
-      goBackIndex () {
-        this.$store.commit('UPDATE_OfflineShow', false)
-        this.$router.replace('/')
-      }
+export default {
+  data () {
+    return {
+      offlineIco: './static/images/default.png'
+    }
+  },
+  methods: {
+    goBackIndex () {
+      this.$store.commit('UPDATE_OfflineShow', false)
+      this.$router.replace('/')
     }
   }
+}
 </script>
 <style lang="less" scoped>
   .offline_box{ position: fixed; left: 0; right: 0;bottom:0; top:0;}

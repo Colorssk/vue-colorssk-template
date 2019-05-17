@@ -1,5 +1,6 @@
 import asynComponent from './asynComponent'
 import Layout from '@/views/layout/Layout' // 公共模块
+// import Layout1 from '@/views/layout/layout1'
 export const constantRouterMap = [
   {
     path: '/',
@@ -71,5 +72,30 @@ export const constantRouterMap = [
         component: asynComponent.hello
       }
     ]
+  },
+  {
+    path: '/studentInfo',
+    component: Layout,
+    // component: Layout1,
+    redirect: '/studentInfo/index',
+    children: [
+      {
+        path: '/studentInfo/index',
+        name: 'studentInfo',
+        component: asynComponent.studentInfo
+      }
+    ]
   }
+  // {
+  //   path: '/test',
+  //   // component: Layout1,
+  //   redirect: '/test/index',
+  //   children: [
+  //     {
+  //       path: '/test/index',
+  //       name: 'test',
+  //       component: asynComponent.test
+  //     }
+  //   ]
+  // }
 ]
