@@ -31,7 +31,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 graphql请求方式：
-this.$apollo.query({
+<!-- this.$apollo.query({
 query: q_user,
 variables: {
 id: 1,
@@ -40,7 +40,7 @@ id: 1,
 console.log(res)
 }).catch(err => {
 console.log(err)
-})
+}) -->
 统一登陆，另做，permission.js另起
 
 后端获得登陆权限后：可以访问公共路由
