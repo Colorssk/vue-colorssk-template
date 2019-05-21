@@ -70,17 +70,17 @@ export default {
       // }, (data) => { console.log(data) })
     }, 500)
 
-    this.$graphql.request(`
-          query{
-            Jobs{
-              _id,
-              job_name
-            }
-          }
-        `).then(result => {
-      console.log('分界线')
-      console.log(result)
-    })
+    // this.$graphql.request(`
+    //       query{
+    //         Jobs{
+    //           _id,
+    //           job_name
+    //         }
+    //       }
+    //     `).then(result => {
+    //   console.log('分界线')
+    //   console.log(result)
+    // })
   }
 
 }

@@ -1,17 +1,19 @@
 <template>
    <div class="root">
     <el-card class="root-card">
-      <el-form ref="loginForm" :model="loginForm" label-width="80px">
-        <el-form-item label="用户名">
-          <el-input v-model="loginForm.name"></el-input>
+      <el-form ref="loginForm" :model="loginForm" :rules="rules" label-width="80px">
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="loginForm.name" placeholder="请输入用户名"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="loginForm.password"></el-input>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="loginForm.password" placeholder="请输入密码"></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-button @click="login" class="confimBotton">
+          登录
+          </el-button>
+      </el-form-item>
       </el-form>
-      <el-button @click="login">
-        登录
-      </el-button>
     </el-card>
       <span>by-Colorssk</span>
    </div>
@@ -26,6 +28,16 @@ export default {
       loginForm: {
         name: '',
         password: ''
+      },
+      rules: {
+        name: [
+          { required: true, trigger: 'blur', message: '请输入用户名' },
+          { min: 1, max: 5, message: '长度在 1 到 5 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, trigger: 'blur', message: '请输入密码' },
+          { min: 1, max: 5, message: '长度在 1 到 5 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -104,5 +116,8 @@ export default {
   height: 30%;
   margin-left: 27.5%;
   margin-top: 5%;
+}
+.confimBotton{
+  margin-left: -100px;
 }
 </style>

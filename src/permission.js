@@ -6,6 +6,8 @@ import api from '@/api/api.js'
 // const whiteList = ['/', '/auth-redirect']// no redirect whitelist
 export const permission = (router, store) => {
   router.beforeEach((to, from, next) => {
+    // console.log(api.getAsyncMenu())
+    // console.log(this.$api)
     // 获取权限，统一到/root,后端需要指定回调路由
     if (to.path === '/root') {
       next()
@@ -17,7 +19,6 @@ export const permission = (router, store) => {
         if (!getCookie('access_token')) {
           // 在获取menu之前还需要一个登陆接口
           http({ url: api.getAsyncMenu(), method: 'get', Mock: true })()().then(res => {
-            debugger
             if (Number(res.data.msgCode) === 100) {
               // 获取到动态路由
               var tempMenus = res.data.data
