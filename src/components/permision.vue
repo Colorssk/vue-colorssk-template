@@ -176,7 +176,12 @@ export default {
   },
   mounted () {
     this.tableData = []
-    this.$graphql.request(`
+    this.getnewList()
+    // this.cavasAni()
+  },
+  methods: {
+    getnewList () {
+      this.$graphql.request(`
           query{
             workers{
               name,
@@ -187,11 +192,9 @@ export default {
             }
           }
         `).then(result => {
-      this.tableData = this.workersFilter(result.workers)
-    })
-    // this.cavasAni()
-  },
-  methods: {
+        this.tableData = this.workersFilter(result.workers)
+      })
+    },
     graphqlArrTrans (arr) {
       var tranarr = ''
       arr.forEach((item, index) => {
@@ -223,6 +226,7 @@ export default {
         console.log(result)
       })
       this.dialogTeacherVisible = false
+      this.getnewList()
     },
     workersFilter (arr) {
       arr.map(item => {
@@ -277,7 +281,14 @@ export default {
       console.log(index, row)
     },
     handleDelete (index, row) {
-      console.log(index, row)
+      this.$graphql.request(`
+        mutation{
+            workerDelete(name:"${row.name}")
+        }
+        `).then(res => {
+        console.log(res.workers)
+      })
+      this.getnewList()
     },
     cavasAni () {
       var canvas = document.getElementById('canvas')

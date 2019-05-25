@@ -3,7 +3,8 @@
 import {
   GraphQLNonNull,
   GraphQLList,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLString
 } from 'graphql'
 import {workerUpdateInput, WorkerResult, workerInput} from './model'
 
@@ -43,8 +44,24 @@ const WorkerCreate = {
     return [result]
   }
 }
+const workerDelete = {
+  type: GraphQLBoolean,
+  args: {
+    name: {
+      name: 'name',
+      type: new GraphQLNonNull(GraphQLString) // 传递参数的类型
+    }
+  },
+  async resolve (root, params, options) {
+    // 存储到数据库
+    let res = await workerModel.deleteOne({ name: params.name })
+    console.log(res.deletedCount)
+    return res.deletedCount >= 1
+  }
+}
 
 export default {
   WorkerCreate: WorkerCreate,
-  WorkerUpdate: WorkerUpdate
+  WorkerUpdate: WorkerUpdate,
+  workerDelete: workerDelete
 }
